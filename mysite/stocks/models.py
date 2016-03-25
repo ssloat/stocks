@@ -140,7 +140,7 @@ class StockDividend(db.Model):
     payment_date = db.Column(db.Date, nullable=False)
 
     __table_args__ = (
-        db.UniqueConstraint('stock_id', 'dividend_type', 'payable_date', 
+        db.UniqueConstraint('stock_id', 'dividend_type', 'payment_date', 
             name='_unq_stock_dividend'
         ),
     )
