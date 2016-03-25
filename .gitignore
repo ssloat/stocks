@@ -8,3 +8,4 @@ vanguard.db
 *.txt
 create_stocks.py
 sp500.csv
+config.py
