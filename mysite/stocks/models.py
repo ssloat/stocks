@@ -16,11 +16,12 @@ class Stock(db.Model):
     sedol = db.Column(db.String(64), nullable=False)
     name = db.Column(db.String(64), nullable=False)
     sector = db.Column(db.String(64), nullable=False)
+    industry = db.Column(db.String(64), nullable=True)
 
     prices = db.relationship('StockPrice', backref='stock')
     dividends = db.relationship('StockDividend', backref='stock')
 
-    def __init__(self, ticker, exchange, sedol, name, sector):
+    def __init__(self, ticker, exchange, sedol, name, sector, industry):
         self.ticker = ticker
         self.exchange = exchange
         self.sedol = sedol
