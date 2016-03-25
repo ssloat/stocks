@@ -1,0 +1,10 @@
+bin/
+dump.py
+app.db
+vanguard.db
+*.pyc
+*.swp
+*.log
+*.txt
+create_stocks.py
+sp500.csv
