@@ -4,6 +4,7 @@ import datetime
 import time
 import os
 import logging
+import pandas
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +19,16 @@ class Stock(db.Model):
     sector = db.Column(db.String(64), nullable=False)
     industry = db.Column(db.String(64), nullable=True)
 
-    prices = db.relationship('StockPrice', backref='stock')
+    _prices = db.relationship('StockPrice', backref='stock')
     dividends = db.relationship('StockDividend', backref='stock')
+
+    @property
+    def prices(self):
+        return pandas.DataFrame(
+            data=[(x.open_, x.high, x.low, x.close, x.volume) for x in self._prices], 
+            columns=('open', 'high', 'low', 'close', 'volume'),
+            index=pandas.to_datetime([x.date for x in self._prices]),
+        )
 
     def __init__(self, ticker, exchange, sedol, name, sector, industry):
         self.ticker = ticker
@@ -67,7 +76,7 @@ class Stock(db.Model):
 
     def add_price(self, date, open_, high, low, close, volume):
         try:
-            sp = [sp for sp in self.prices if sp.date == date]
+            sp = [sp for sp in self._prices if sp.date == date]
             if sp:
                 sp = sp[0]
                 sp.open_ = open_
