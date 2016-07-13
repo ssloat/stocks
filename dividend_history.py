@@ -37,4 +37,4 @@ if __name__ == '__main__':
 
             stock.add_dividend('Income', dividend, date, date, date, date)
 
-         db.session.commit()
+        db.session.commit()
