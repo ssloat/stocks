@@ -8,7 +8,7 @@ from mysite.stocks.models import Stock, StockPrice
 URL_BASE = 'http://real-chart.finance.yahoo.com/table.csv'
 
 if __name__ == '__main__':
-    today = datetime.date.today() 
+    end = datetime.date.today() 
     start = datetime.date(1980, 1, 1)
 
     http = urllib3.PoolManager()
