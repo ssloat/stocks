@@ -9,7 +9,7 @@ URL_BASE = 'http://real-chart.finance.yahoo.com/table.csv'
 
 if __name__ == '__main__':
     today = datetime.date.today() 
-    date = today - datetime.timedelta(days=15)
+    start = today - datetime.timedelta(days=15)
 
     http = urllib3.PoolManager()
 
