@@ -1,6 +1,7 @@
 import urllib
 import urllib3
 import datetime
+import re
 
 from mysite import db
 from mysite.stocks.models import Stock, StockPrice
