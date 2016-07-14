@@ -40,9 +40,16 @@ if __name__ == '__main__':
         for line in lines[1:]:
             data = line.split(',')
             date = datetime.date(*map(int, data[0].split('-')))
-            o, h, l, c, v, adj_close = [None if s=='-' else float(s) for s in data[1:]]
+            try:
+                for i in range(len(data)-1):
+                    if data[i+1] == '':
+                        data[i+1] = '0'
 
-            stock.add_price( date, o, h, l, c, v )
+                o, h, l, c, v = [None if s=='-' else float(s) for s in data[1:6]]
+
+                stock.add_price( date, o, h, l, c, v )
+            except ValueError as e:
+                print data, e
 
     args.append('g=v')
     url = '%s?%s' % (URL_BASE, '&'.join(args))
